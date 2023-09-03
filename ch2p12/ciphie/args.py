@@ -13,8 +13,8 @@ def get_ciphertext(args):
         return sys.stdin.read()
 
 def create_arg_parser():
-    arg_parser = ArgumentParser(description='Cyphie')
-    arg_parser.add_argument('-i', '--input', help='File input')
+    arg_parser = ArgumentParser(prog='ciphie', description='Ciphie')
+    arg_parser.add_argument('-i', '--input', help='File input (default: stdin)')
     arg_parser.add_argument('-v', '--verbose', action='store_true', help='Verbose output')
     arg_parser.add_argument('-d', '--decode', action='store_true', help='Attempt to break ciphertext before entering REPL')
 

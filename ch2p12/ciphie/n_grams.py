@@ -60,10 +60,9 @@ class NGramFile:
         if self.filename.endswith('.zip'):  
             self.zp = zipfile.ZipFile(self.filename, 'r')
             self.fp = self.zp.open(self.zp.namelist()[0], 'r')
-            return self.fp
         else:
             self.fp = open(self.filename, 'rb')
-            return self.fp
+        return self.fp
     
     def __exit__(self, exc_type, exc_value, traceback):
         if self.fp:

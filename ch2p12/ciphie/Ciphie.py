@@ -5,6 +5,7 @@ import time
 from typing import List
 
 from ciphie.n_grams import Frequencies, NGrams
+from ciphie.strings import BAR
 from ciphie.utils import chr_list_to_str, list_to_str
 
 RE_NON_ALPHABETIC = re.compile(r'[^a-z]')
@@ -23,7 +24,7 @@ class Ciphie:
         if not self.verbose:
             return
         
-        buffer = []
+        buffer = [BAR]
 
         best_key_order = chr_list_to_str(translation.keys())
         best_key = chr_list_to_str(translation.values())
@@ -34,10 +35,11 @@ class Ciphie:
         buffer.append(f'  {best_key}')
         buffer.append('decoded:')
         buffer.append(ciphertext.translate(translation))
-        print(os.linesep.join(buffer))
+        buffer.append(BAR)
+        return os.linesep.join(buffer)
 
     def report(self, score=None, key=None):
-        self._report(self.ciphertext, score or self.best_score, key or self.best_key)
+        print(self._report(self.ciphertext, score or self.best_score, key or self.best_key))
 
     @staticmethod
     def get_cipher_alphabet_in_frequency_order(ciphertext: str) -> List[str]:
@@ -97,7 +99,7 @@ class Ciphie:
         self.report()
         end = time.time()
         if self.verbose:
-            print(f'elapsed: {round(end - start, 2)}s')
+            print(f'time elapsed: {round(end - start, 2)}s')
         return self.best_key
 
 
